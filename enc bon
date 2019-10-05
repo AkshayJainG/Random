@@ -1,0 +1,20 @@
+window.oldencrypt = aes.Ctr.encrypt;
+function newencrypt () {
+  console.log(...arguments);
+  return window.oldencrypt(...arguments);
+}
+
+aes.Ctr.encrypt = newencrypt;
+
+actualRequest
+“{”deviceID”:“xyz”,“pin”:“11111”,“pushToken”:“none”,“appVersion”:“1.0.0.0”,“languageCode”:“en”}”
+
+test = JSON.parse(actualRequest)
+{deviceID: “9d1861191b5d9322”, pin: “11111", pushToken: “none”, appVersion: “1.0.0.0", languageCode: “en”, …}
+
+test.pin = “22222"
+“22222”
+
+actualRequest = JSON.stringify(test)
+“{”deviceID”:“xyz”,“pin”:“22222”,“pushToken”:“none”,“appVersion”:“1.0.0.0”,“languageCode”:“en”}”
+
